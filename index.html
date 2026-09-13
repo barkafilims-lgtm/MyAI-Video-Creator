@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>MyAI Video Creator</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="logo">✦</span><span>myai</span></div>
+    <div class="nav">
+      <button class="ghost" onclick="showHistory()">My videos</button>
+      <select id="language" onchange="setLanguage(this.value)">
+        <option value="en">English</option>
+        <option value="so">Soomaali</option>
+        <option value="ar">العربية</option>
+      </select>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="eyebrow">MYAI / STUDIO</div>
+      <h1 data-i18n="title">Create something worth watching.</h1>
+      <p data-i18n="subtitle">Describe your idea and generate a real AI video.</p>
+    </section>
+
+    <section class="card">
+      <div class="tabs">
+        <button class="tab active" id="textTab" onclick="setMode('text')" data-i18n="textToVideo">Text to video</button>
+        <button class="tab" id="imageTab" onclick="setMode('image')" data-i18n="imageToVideo">Image to video</button>
+      </div>
+
+      <label class="label" data-i18n="yourIdea">Your idea</label>
+      <textarea id="prompt" maxlength="1000"
+        placeholder="A cinematic sunset over Hargeisa, camera slowly moving between rooftops..."
+      ></textarea>
+
+      <div id="imageBox" class="imagebox hidden">
+        <input id="image" type="file" accept="image/*">
+        <small data-i18n="imageHelp">Upload an image to animate it.</small>
+      </div>
+
+      <div class="controls">
+        <div>
+          <span class="label">Aspect ratio</span>
+          <div class="seg">
+            <button class="ratio active" data-ratio="16:9">16:9</button>
+            <button class="ratio" data-ratio="9:16">9:16</button>
+            <button class="ratio" data-ratio="1:1">1:1</button>
+          </div>
+        </div>
+        <div>
+          <span class="label">Duration</span>
+          <select id="duration">
+            <option value="6">6s</option>
+            <option value="15">15s</option>
+            <option value="30">30s</option>
+            <option value="60">60s</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="toggles">
+        <label><input type="checkbox" id="subs" checked> <span data-i18n="subtitles">Automatic subtitles</span></label>
+        <label><input type="checkbox" id="music" checked> <span data-i18n="music">Background music</span></label>
+      </div>
+
+      <button id="generate" class="generate" onclick="generateVideo()">✦ <span data-i18n="generate">Generate video</span></button>
+      <div id="status" class="status"></div>
+    </section>
+
+    <section id="result" class="card hidden">
+      <div class="resulthead">
+        <h2 data-i18n="result">Your video</h2>
+        <button class="ghost" onclick="saveCurrent()">Save</button>
+      </div>
+      <video id="video" controls playsinline></video>
+      <a id="download" class="download" download="myai-video.mp4">Download MP4</a>
+    </section>
+
+    <section id="history" class="card hidden">
+      <div class="resulthead">
+        <h2>My videos</h2>
+        <button class="ghost" onclick="hideHistory()">Close</button>
+      </div>
+      <div id="historyList"></div>
+    </section>
+  </main>
+
+<script src="/app.js"></script>
+</body>
+</html>
