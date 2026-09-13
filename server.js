@@ -10,8 +10,8 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const upload = multer({ limits: { fileSize: 10 * 1024 * 1024 } });
 
-app.use(express.json({ limit: "12mb" }));
-app.use(express.static(path.join(__dirname, "public")));
+res.sendFile(path.join(__dirname, "index.html"));
+app.use(express.static(__dirname));
 
 const token = process.env.REPLICATE_API_TOKEN;
 const model = process.env.REPLICATE_MODEL || "minimax/video-01";
